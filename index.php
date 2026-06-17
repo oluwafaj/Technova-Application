@@ -1,191 +1,134 @@
-<?php require_once 'config.php'; require_once 'includes/header.php'; $b = BASE_PATH; ?>
-
-<!-- ══ HERO ══════════════════════════════════════ -->
-<section class="hero">
-  <div class="wrap">
-    <div class="hero-inner">
-
-      <div class="hero-content">
-        <?php if (SITE_AVAILABLE): ?>
-        <div class="avail-badge reveal">
-          <span class="avail-dot"></span> Available for new projects
+<?php
+$environment = getenv('APP_ENV') ?: 'Production';
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technova - Cloud Infrastructure</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .badge {
+            background: #1e40af;
+            color: #93c5fd;
+            padding: 0.4rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        h1 span { color: #3b82f6; }
+        p.subtitle {
+            color: #94a3b8;
+            font-size: 1.1rem;
+            text-align: center;
+            max-width: 600px;
+            line-height: 1.7;
+            margin-bottom: 3rem;
+        }
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+            max-width: 900px;
+            margin-bottom: 3rem;
+        }
+        .card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .card .icon { font-size: 2rem; margin-bottom: 0.75rem; }
+        .card h3 { font-size: 0.95rem; color: #cbd5e1; margin-bottom: 0.4rem; }
+        .card p { font-size: 0.8rem; color: #64748b; }
+        .env-bar {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 1rem 2rem;
+            display: flex;
+            gap: 2rem;
+            font-size: 0.85rem;
+            color: #64748b;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .env-bar span { color: #e2e8f0; font-weight: 600; }
+        footer {
+            margin-top: 3rem;
+            color: #475569;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="badge">🚀 Deployed via GitHub Actions CI/CD</div>
+    <h1>Technova <span>Cloud</span><br>Infrastructure</h1>
+    <p class="subtitle">
+        Multi-environment Azure infrastructure built with Terraform,
+        monitored with Azure Monitor, secured with Microsoft Defender
+        for Cloud, and deployed automatically via CI/CD pipelines.
+    </p>
+    <div class="cards">
+        <div class="card">
+            <div class="icon">🏗️</div>
+            <h3>Infrastructure as Code</h3>
+            <p>Terraform modules for all Azure resources</p>
         </div>
-        <?php endif; ?>
-
-        <h1 class="hero-title reveal">
-          I design &amp; build<br>
-          web products that<br>
-          <em>actually ship.</em>
-        </h1>
-
-        <p class="hero-desc reveal"><?= SITE_TAGLINE ?></p>
-
-        <div class="hero-actions reveal">
-          <a href="<?= $b ?>/pages/portfolio.php" class="btn btn-primary btn-lg">
-            View My Work <i class="fas fa-arrow-right"></i>
-          </a>
-          <a href="<?= $b ?>/pages/contact.php" class="btn btn-ghost btn-lg">
-            Get in Touch
-          </a>
+        <div class="card">
+            <div class="icon">🔄</div>
+            <h3>CI/CD Pipeline</h3>
+            <p>GitHub Actions with approval gates</p>
         </div>
-
-        <div class="hero-scroll reveal">
-          <span class="hero-scroll-line"></span>
-          Scroll to explore
+        <div class="card">
+            <div class="icon">📊</div>
+            <h3>Azure Monitor</h3>
+            <p>CPU, availability & storage alerts</p>
         </div>
-      </div>
-
-      <!-- Profile card -->
-      <div class="hero-card reveal">
-        <div class="hero-card-top"></div>
-        <div class="hero-avatar"><?= SITE_INITIALS ?></div>
-        <div class="hero-card-body">
-          <div class="hero-card-name"><?= SITE_NAME ?></div>
-          <div class="hero-card-role"><?= SITE_ROLE ?></div>
-          <div style="font-size:.75rem;color:var(--text-3);display:flex;align-items:center;gap:6px;justify-content:center">
-            <i class="fas fa-map-marker-alt" style="color:var(--blue);font-size:.65rem"></i>
-            <?= SITE_LOCATION ?>
-          </div>
-          <div class="hero-card-stats">
-            <div class="hero-card-stat">
-              <div class="hero-card-stat-n">30+</div>
-              <div class="hero-card-stat-l">Projects</div>
-            </div>
-            <div class="hero-card-stat">
-              <div class="hero-card-stat-n">5yr</div>
-              <div class="hero-card-stat-l">Experience</div>
-            </div>
-            <div class="hero-card-stat">
-              <div class="hero-card-stat-n">20+</div>
-              <div class="hero-card-stat-l">Clients</div>
-            </div>
-          </div>
+        <div class="card">
+            <div class="icon">🔒</div>
+            <h3>Defender for Cloud</h3>
+            <p>Standard tier security posture</p>
         </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ══ STACK ══════════════════════════════════════ -->
-<section class="stack-section">
-  <div class="wrap">
-    <p class="stack-label">Tech stack</p>
-    <div class="stack-chips">
-      <?php
-      $stack = [
-        ['PHP 8',          'fab fa-php'],
-        ['MySQL',          'fas fa-database'],
-        ['JavaScript',     'fab fa-js'],
-        ['Bootstrap 5',    'fab fa-bootstrap'],
-        ['HTML5 / CSS3',   'fab fa-html5'],
-        ['REST APIs',      'fas fa-plug'],
-        ['Git & GitHub',   'fab fa-git-alt'],
-        ['PHPMailer',      'fas fa-envelope'],
-        ['jQuery',         'fas fa-code'],
-        ['XAMPP / Linux',  'fab fa-linux'],
-      ];
-      foreach ($stack as [$n, $i]):
-      ?>
-      <span class="chip"><i class="<?= $i ?>"></i><?= $n ?></span>
-      <?php endforeach; ?>
-    </div>
-  </div>
-</section>
-
-<!-- ══ SERVICES ═══════════════════════════════════ -->
-<section class="services-section">
-  <div class="wrap">
-    <span class="eyebrow">What I do</span>
-    <h2 class="s-title">Services</h2>
-    <p class="s-sub">End-to-end development — from architecture and design to deployment and maintenance.</p>
-
-    <div class="services-grid">
-      <?php
-      $svcs = [
-        ['fas fa-server',         'Backend Development',   'Robust PHP applications, RESTful APIs, PDO/MySQL architecture, and secure server-side logic.'],
-        ['fas fa-desktop',        'Frontend Interfaces',   'Pixel-perfect, responsive UIs with Bootstrap 5, vanilla JS, and smooth interactions.'],
-        ['fas fa-university',     'Fintech Platforms',     'Banking systems, payment flows, crypto dashboards, PIN security, and audit logging.'],
-        ['fas fa-home',           'Real Estate Portals',   'Property listings, booking engines, admin dashboards, and PHPMailer-powered enquiry flows.'],
-        ['fas fa-chart-bar',      'Admin Dashboards',      'Data-rich control panels with Chart.js visualisations, user management, and role-based access.'],
-        ['fas fa-rocket',         'Deploy & Maintain',     'Full deployment from cPanel/XAMPP to live hosting, plus ongoing support and updates.'],
-      ];
-      foreach ($svcs as $k => [$icon, $title, $desc]):
-      ?>
-      <div class="svc-card reveal">
-        <div class="svc-num">0<?= $k+1 ?></div>
-        <div class="svc-icon"><i class="<?= $icon ?>"></i></div>
-        <h3 class="svc-title"><?= $title ?></h3>
-        <p class="svc-desc"><?= $desc ?></p>
-      </div>
-      <?php endforeach; ?>
-    </div>
-  </div>
-</section>
-
-<!-- ══ FEATURED WORK ══════════════════════════════ -->
-<section class="work-section">
-  <div class="wrap">
-    <div class="work-header">
-      <div>
-        <span class="eyebrow">Portfolio</span>
-        <h2 class="s-title">Featured work</h2>
-      </div>
-      <a href="<?= $b ?>/pages/portfolio.php" class="btn btn-ghost">All Projects <i class="fas fa-arrow-right"></i></a>
-    </div>
-
-    <div class="project-list">
-      <?php
-      // [icon, accent-color, image (optional screenshot path or null), title, tags, desc]
-      $featured = [
-        ['fas fa-building-columns', '#3B6FE0', null, 'Infinite Bank v3.0',   ['PHP', 'MySQL', 'Bootstrap'],   'Full-stack digital banking platform — transfers, PIN auth, crypto flows, support tickets, audit logs.'],
-        ['fas fa-house',            '#1E9E5A', null, 'Greycad Development',  ['PHP', 'PDO', 'PHPMailer'],     'Production real estate portal — property listings, bookings, admin panel, Forest Green design system.'],
-        ['fas fa-futbol',           '#D98E22', null, 'FootballIQ',           ['PHP', 'API-Football', 'JS'],   'Match prediction engine integrating API-Football v3 with weighted draw calculation and results dashboard.'],
-        ['fas fa-ship',             '#5B5BD6', null, 'SwiftReach Logistics', ['PHP', 'Quill', 'MySQL'],       'Shipping & tracking platform with receiver notifications, rich text mail composer, and invoice builder.'],
-      ];
-      foreach ($featured as [$icon, $accent, $img, $title, $tags, $desc]):
-      ?>
-      <a href="<?= $b ?>/pages/portfolio.php" class="project-row reveal">
-        <div class="pr-thumb" style="background:linear-gradient(135deg, <?= $accent ?>1A, <?= $accent ?>0A)">
-          <?php if ($img): ?>
-            <img src="<?= $b . $img ?>" alt="<?= $title ?>" class="pr-thumb-img">
-          <?php else: ?>
-            <i class="<?= $icon ?>" style="color:<?= $accent ?>"></i>
-          <?php endif; ?>
+        <div class="card">
+            <div class="icon">💾</div>
+            <h3>Disaster Recovery</h3>
+            <p>Daily VM backups, GRS storage</p>
         </div>
-        <div class="pr-body">
-          <div class="pr-tags">
-            <?php foreach ($tags as $t): ?><span class="pr-tag"><?= $t ?></span><?php endforeach; ?>
-          </div>
-          <div class="pr-title"><?= $title ?></div>
-          <div class="pr-desc"><?= $desc ?></div>
+        <div class="card">
+            <div class="icon">🌍</div>
+            <h3>Multi-Environment</h3>
+            <p>Separate Dev & Production deployments</p>
         </div>
-        <i class="fas fa-arrow-up-right-from-square pr-arrow"></i>
-      </a>
-      <?php endforeach; ?>
     </div>
-  </div>
-</section>
-
-<!-- ══ CTA ════════════════════════════════════════ -->
-<section class="cta-strip">
-  <div class="wrap">
-    <div class="cta-box reveal">
-      <div>
-        <p style="font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:10px">Let's work together</p>
-        <h2 class="cta-title">Have a project in mind?<br>Let's build it.</h2>
-        <p class="cta-sub">Available for freelance contracts, long-term partnerships, and interesting challenges.</p>
-      </div>
-      <div class="cta-actions">
-        <a href="<?= $b ?>/pages/contact.php" class="btn btn-primary btn-lg">
-          <i class="fas fa-paper-plane"></i> Start a Conversation
-        </a>
-        <a href="mailto:<?= SITE_EMAIL ?>" class="btn btn-ghost btn-lg" style="color:rgba(255,255,255,.6);border-color:rgba(255,255,255,.15)">
-          <?= SITE_EMAIL ?>
-        </a>
-      </div>
+    <div class="env-bar">
+        <div>Environment: <span><?= htmlspecialchars($environment) ?></span></div>
+        <div>PHP: <span><?= phpversion() ?></span></div>
+        <div>Server Time: <span><?= date('Y-m-d H:i:s') . ' UTC' ?></span></div>
+        <div>Region: <span>West Europe</span></div>
     </div>
-  </div>
-</section>
-
-<?php require_once 'includes/footer.php'; ?>
+    <footer>Technova Production Infrastructure &copy; <?= date('Y') ?></footer>
+</body>
+</html>
